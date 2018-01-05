@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/ipos_uni_dialog_frame"
+    android:paddingBottom="8dp"
+    android:paddingLeft="18.5dp"
+    android:paddingRight="18.5dp"
+    android:paddingTop="8dp" >
+
+    <ImageView
+        android:id="@+id/ipos_infoOperating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:scaleType="center"
+        android:src="@drawable/mpay" />
+
+    <ImageView
+        android:id="@+id/ipos_infoProgressAnim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ipos_infoOperating"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="9dp"
+        android:scaleType="center"
+        android:src="@drawable/ipos_uni_progress_frame_bg" />
+
+    <TextView
+        android:id="@+id/ipos_id_tv_loadingmsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="25dp"
+        android:textColor="@android:color/white"
+        android:textSize="14dp"
+        android:visibility="gone" />
+
+</RelativeLayout>
