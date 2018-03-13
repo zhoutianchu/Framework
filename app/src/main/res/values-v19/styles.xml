@@ -1,17 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-
-    <style name="ipos_uniprogressdialog" parent="@android:Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <!--沉浸式状态栏-->
+    //若是使用window flag控制导航栏/状态栏透明
     <style name="AppTheme.NoTitle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -22,13 +11,8 @@
         <!--设置导航栏/状态栏窗口color为透明-->
         <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
         <!--<item name="android:navigationBarColor">@android:color/transparent</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <!--TextView 通用布局样式-->
-    <style name="text_title_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18dp</item>
     </style>
 </resources>

@@ -6,7 +6,7 @@ package com.zhoutianchu.framework.bean.base;
 
 public class Message<T> {
 
-    public static enum MsgId {EXIT,GOTO_CASHIER,GOTO_OWNER,SET_NO_MENU,SET_MENU,PAY_SUCCESS,SETTLEMENT_PWD_CONFIRM_SUCCESS,ORDER_REFUND_RESULT,ORDER_SEARCH_RESULT,PUSH_DATA,LOGIN_FAIL,PUSH_ORDER_DATA,REFRESH_SETTLEMENT_INFO,LANGUAGE_CHANGE}
+    public static enum MsgId {EXIT}
 
     private MsgId msg_id;
 

@@ -1,9 +1,12 @@
 package com.zhoutianchu.framework.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
@@ -90,6 +93,12 @@ public abstract class BaseActivity extends SwipeBackActivity {
         // 滑动退出的效果只能从边界滑动才有效果，如果要扩大touch的范围，可以调用这个方法
         //mSwipeBackLayout.setEdgeSize(200);
         setLayout();
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         addAction();
@@ -151,6 +160,10 @@ public abstract class BaseActivity extends SwipeBackActivity {
      */
     protected Observable throttleFirst(View view) {
         return RxView.clicks(view).throttleFirst(1000, TimeUnit.MILLISECONDS);
+    }
+
+    protected Observable throttleFirst(long delay, View view) {
+        return RxView.clicks(view).throttleFirst(delay, TimeUnit.MILLISECONDS);
     }
 
 
