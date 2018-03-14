@@ -2,33 +2,21 @@ package com.zhoutianchu.framework.view;
 
 
 import android.content.Context;
-
 import android.graphics.Canvas;
-
 import android.graphics.Paint;
-
 import android.graphics.Path;
-
 import android.util.AttributeSet;
-
-
-
-import com.sevenheaven.gesturelock.GestureLockView;
-
+import com.zhoutianchu.framework.R;
 
 
 /**
-
  * Created by caifangmao on 1/27/16.
-
  */
 
 public class NexusStyleLockView extends GestureLockView {
 
 
-
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
 
 
     private int mCenterX, mCenterY;
@@ -38,11 +26,9 @@ public class NexusStyleLockView extends GestureLockView {
     private int mRadius;
 
 
+    private int COLOR_NORMAL = 0xFF029FF1;
 
-    private static final int COLOR_NORMAL = 0xFF029FF1;
-
-    private static final int COLOR_ERROR = 0xFFFF0000;
-
+    private int COLOR_ERROR = 0xFFFF0000;
 
 
     private float innerRate = 0.10F;
@@ -52,7 +38,6 @@ public class NexusStyleLockView extends GestureLockView {
     private float outerRate = 0.5F;
 
 
-
     private float arrowRate = 0.1F;
 
     private float arrowDistanceRate = 0.35F;
@@ -60,45 +45,34 @@ public class NexusStyleLockView extends GestureLockView {
     private int arrowDistance;
 
 
-
     private Path arrow;
 
 
-
-    public NexusStyleLockView(Context context){
-
+    public NexusStyleLockView(Context context) {
         this(context, null);
-
     }
 
 
-
-    public NexusStyleLockView(Context context, AttributeSet attrs){
+    public NexusStyleLockView(Context context, AttributeSet attrs) {
 
         this(context, attrs, 0);
 
     }
 
 
-
-    public NexusStyleLockView(Context context, AttributeSet attrs, int defStyle){
-
+    public NexusStyleLockView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-
-
+        COLOR_NORMAL = context.getResources().getColor(R.color.colorGestureNormal);
+        COLOR_ERROR = context.getResources().getColor(R.color.colorGestureError);
         arrow = new Path();
-
     }
-
 
 
     @Override
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh){
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
         super.onSizeChanged(w, h, oldw, oldh);
-
 
 
         mWidth = w;
@@ -106,11 +80,9 @@ public class NexusStyleLockView extends GestureLockView {
         mHeight = h;
 
 
-
         mCenterX = w / 2;
 
         mCenterY = h / 2;
-
 
 
         mRadius = w > h ? h : w;
@@ -118,9 +90,7 @@ public class NexusStyleLockView extends GestureLockView {
         mRadius /= 2;
 
 
-
         arrowDistance = (int) (mRadius * arrowDistanceRate);
-
 
 
         int length = (int) (mRadius * arrowRate);
@@ -138,10 +108,9 @@ public class NexusStyleLockView extends GestureLockView {
     }
 
 
-
     @Override
 
-    protected void doArrowDraw(Canvas canvas){
+    protected void doArrowDraw(Canvas canvas) {
 
         mPaint.setStyle(Paint.Style.FILL);
 
@@ -152,12 +121,11 @@ public class NexusStyleLockView extends GestureLockView {
     }
 
 
-
     @Override
 
-    protected void doDraw(LockerState state, Canvas canvas){
+    protected void doDraw(LockerState state, Canvas canvas) {
 
-        switch(state){
+        switch (state) {
 
             case LOCKER_STATE_NORMAL:
 

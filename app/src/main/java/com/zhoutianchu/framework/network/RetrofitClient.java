@@ -97,7 +97,10 @@ public class RetrofitClient {
                 //Create a KeyStore containing our trusted CAs
                 KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
                 keyStore.load(null, null);
+
+                //证书文件
                 int[] certificates = {R.raw.key};
+
                 for (int i = 0; i < certificates.length; i++) {
                     //读取本地证书
                     InputStream is = context.getResources().openRawResource(certificates[i]);

@@ -2,6 +2,7 @@ package com.zhoutianchu.framework.activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -187,6 +188,15 @@ public abstract class BaseActivity extends SwipeBackActivity {
 
     protected <T> T getSerExtra(String id) {
         return (T) getIntent().getSerializableExtra(id);
+    }
+
+    /**
+     * 震动
+     * @param time
+     */
+    protected void setVibrator(long time){
+        Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
+        vibrator.vibrate(time);
     }
 
 }

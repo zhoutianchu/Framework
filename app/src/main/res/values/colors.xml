@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-
+    <!--手势密码控件-->
+    <color name="colorGestureNormal">#FF029FF1</color>
+    <color name="colorGestureError">#FFFF0000</color>
 </resources>
