@@ -1,9 +1,14 @@
 package com.zhoutianchu.framework.activity;
 
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -13,12 +18,15 @@ import android.widget.Toast;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zhoutianchu.framework.bean.base.HttpResponse;
 import com.zhoutianchu.framework.bean.base.Message;
+import com.zhoutianchu.framework.intf.PermissionListener;
 import com.zhoutianchu.framework.view.MocamProgressDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
@@ -41,6 +49,9 @@ public abstract class BaseActivity extends SwipeBackActivity {
     private SwipeBackLayout mSwipeBackLayout;
 
     private static Toast toast;
+
+    private static PermissionListener mPermissionListener;
+    private static final int CODE_REQUEST_PERMISSION = 1;
 
 
     /**
@@ -106,11 +117,65 @@ public abstract class BaseActivity extends SwipeBackActivity {
         initData();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case CODE_REQUEST_PERMISSION:
+                if (grantResults.length > 0) {
+                    List<String> deniedPermissions = new ArrayList<>();
+                    for (int i = 0; i < grantResults.length; i++) {
+                        int result = grantResults[i];
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            String permission = permissions[i];
+                            deniedPermissions.add(permission);
+                        }
+                    }
+                    if (deniedPermissions.isEmpty()) {
+                        mPermissionListener.onGranted();
+                    } else {
+                        mPermissionListener.onDenied(deniedPermissions);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     protected abstract void setLayout();
 
     protected abstract void addAction();
 
     protected abstract void initData();
+
+    /**
+     * 申请权限
+     *
+     * @param permissions 需要申请的权限(数组)
+     * @param listener    权限回调接口
+     */
+    protected void requestPermissions(String[] permissions, PermissionListener listener) {
+        Activity activity =this;
+        if (null == activity) {
+            return;
+        }
+
+        mPermissionListener = listener;
+        List<String> permissionList = new ArrayList<>();
+        for (String permission : permissions) {
+            //权限没有授权
+            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(permission);
+            }
+        }
+
+        if (!permissionList.isEmpty()) {
+            ActivityCompat.requestPermissions(activity, permissionList.toArray(new String[permissionList.size()]), CODE_REQUEST_PERMISSION);
+        } else {
+            mPermissionListener.onGranted();
+        }
+    }
 
     public void showProgress() {
         Observable.just("").compose(transformer_to_main()).subscribe(s -> {

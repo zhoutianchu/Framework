@@ -6,7 +6,11 @@ import android.widget.TextView;
 
 import com.zhoutianchu.framework.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import io.reactivex.Observable;
 
 /**
  * Created by zhout on 2018/3/14.
@@ -26,6 +30,6 @@ public abstract class BaseTitleActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        
+
     }
 }
