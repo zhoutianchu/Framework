@@ -15,8 +15,8 @@ import com.zhoutianchu.framework.view.CircleImageTransform;
  * Created by zhout on 2018/3/23.
  */
 
-public class ImageLoaders {
-    private ImageLoaders() {
+public class GlideUtil {
+    private GlideUtil() {
 
     }
 

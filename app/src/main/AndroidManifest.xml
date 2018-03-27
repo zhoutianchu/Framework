@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.zhoutianchu.framework">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -21,6 +23,8 @@
         </activity>
 
         <activity android:name=".activity.GestureLockActivity"/>
+
+        <activity android:name=".activity.ZxingActivity"/>
     </application>
 
 </manifest>

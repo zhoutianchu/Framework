@@ -10,10 +10,25 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        testConfig {
+            keyAlias 'key0'
+            keyPassword 'android'
+            storeFile file('myframework.jks')
+            storePassword 'android'
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true  // 启用 Resource Shrinking
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.testConfig
+        }
+        debug{
+            minifyEnabled false
+            shrinkResources false  // 启用 Resource Shrinking
+            signingConfig signingConfigs.testConfig
         }
     }
     compileOptions {

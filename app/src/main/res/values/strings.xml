@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Framework</string>
+
+    <!--二维码扫描-->
+    <string name="scan_qr_code_title">扫一扫</string>
+    <string name="scan_qr_code_tips">相册</string>
+    <string name="scan_qr_code_tips1">将二维码/条码放入框内,即可自动扫描</string>
+    <string name="scan_qr_code_tips2">打开闪光灯</string>
+    <string name="scan_qr_code_tips3">关闭闪光灯</string>
+    <string name="choose_err_tips">请选择jpg、png格式的图片</string>
+
+
 </resources>
