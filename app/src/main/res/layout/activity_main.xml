@@ -50,6 +50,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="扫码"/>
+            <com.zhoutianchu.framework.view.spanner.NiceSpinner
+                app:layout_constraintLeft_toRightOf="@id/btn_3"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nice_spanner"/>
+            <Button
+                app:layout_constraintLeft_toRightOf="@id/nice_spanner"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                android:id="@+id/btn_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="图片选择"/>
             <LinearLayout
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

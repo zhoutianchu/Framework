@@ -53,6 +53,8 @@ public abstract class BaseActivity extends SwipeBackActivity {
     private static PermissionListener mPermissionListener;
     private static final int CODE_REQUEST_PERMISSION = 1;
 
+    protected static int IMAGE_PICKER=FirstValue++;
+
 
     /**
      * rxjava 切换至主线程

@@ -9,53 +9,47 @@
 
     <!--banner图-->
     <declare-styleable name="Banner">
-
         <attr name="delay_time" format="integer"/>
-
         <attr name="scroll_time" format="integer"/>
-
         <attr name="is_auto_play" format="boolean"/>
-
         <attr name="title_background" format="color|reference"/>
-
         <attr name="title_textcolor" format="color"/>
-
         <attr name="title_textsize" format="dimension"/>
-
         <attr name="title_height" format="dimension"/>
-
         <attr name="indicator_width" format="dimension"/>
-
         <attr name="indicator_height" format="dimension"/>
-
         <attr name="indicator_margin" format="dimension"/>
-
         <attr name="indicator_drawable_selected" format="reference"/>
-
         <attr name="indicator_drawable_unselected" format="reference"/>
-
         <attr name="banner_layout" format="reference"/>
-
         <attr name="banner_default_image" format="reference"/>
-
         <attr name="image_scale_type" format="enum">
-
             <enum name="center" value="0"/>
-
             <enum name="center_crop" value="1"/>
-
             <enum name="center_inside" value="2"/>
-
             <enum name="fit_center" value="3"/>
-
             <enum name="fit_end" value="4"/>
-
             <enum name="fit_start" value="5"/>
-
             <enum name="fit_xy" value="6"/>
-
             <enum name="matrix" value="7"/>
         </attr>
-
     </declare-styleable>
+
+    <!--堆叠头像-->
+    <declare-styleable name="PileLayout">
+        <attr name="PileLayout_vertivalSpace" format="dimension"/>
+        <attr name="PileLayout_pileWidth" format="dimension"/>
+    </declare-styleable>
+
+    <!--nice
+    spanner-->
+    <declare-styleable name="NiceSpinner">
+        <attr name="arrowTint" format="color"/>
+        <attr name="hideArrow" format="boolean"/>
+        <attr name="arrowDrawable" format="reference|color"/>
+        <attr name="dropDownListPaddingBottom" format="dimension"/>
+        <attr name="backgroundSelector" format="integer"/>
+        <attr name="textTint" format="color"/>
+    </declare-styleable>
+
 </resources>
