@@ -153,12 +153,12 @@ public class SaveObjectUtils {
             }
         } catch (InstantiationException e) {
             e.printStackTrace();
-            LogUtil.debug("类型输入错误或者复杂类型无法解析[" + e.getMessage() + "]");
+            LogUtil.INSTANCE.debug("类型输入错误或者复杂类型无法解析[" + e.getMessage() + "]");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            LogUtil.debug("类型输入错误或者复杂类型无法解析[" + e.getMessage() + "]");
+            LogUtil.INSTANCE.debug("类型输入错误或者复杂类型无法解析[" + e.getMessage() + "]");
         }
-        LogUtil.debug("无法找到" + key + "对应的值");
+        LogUtil.INSTANCE.debug("无法找到" + key + "对应的值");
         return null;
     }
 }

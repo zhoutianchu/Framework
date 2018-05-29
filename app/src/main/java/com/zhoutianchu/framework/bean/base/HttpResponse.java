@@ -65,4 +65,8 @@ public class HttpResponse<T> {
             return false;
         return msgCd.endsWith(SUCCESS_CODE);
     }
+
+    public String getId() {
+        return body.getClass().toString();
+    }
 }

@@ -141,7 +141,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             mScroller.setDuration(scrollTime);
             mField.set(viewPager, mScroller);
         } catch (Exception e) {
-            LogUtil.debug(e.getMessage());
+            LogUtil.INSTANCE.debug(e.getMessage());
         }
     }
 
@@ -180,7 +180,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         try {
             setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
-            LogUtil.debug("Please set the PageTransformer class");
+            LogUtil.INSTANCE.debug("Please set the PageTransformer class");
         }
         return this;
     }
@@ -332,7 +332,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private void setImageList(List<?> imagesUrl) {
         if (imagesUrl == null || imagesUrl.size() <= 0) {
             bannerDefaultImage.setVisibility(VISIBLE);
-            LogUtil.debug("The image data set is empty.");
+            LogUtil.INSTANCE.debug("The image data set is empty.");
             return;
         }
         bannerDefaultImage.setVisibility(GONE);
@@ -358,7 +358,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             if (imageLoader != null)
                 imageLoader.displayImage(context, url, imageView);
             else
-                LogUtil.debug("Please set images loader.");
+                LogUtil.INSTANCE.debug("Please set images loader.");
         }
     }
 

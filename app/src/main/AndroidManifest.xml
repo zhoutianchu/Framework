@@ -25,6 +25,8 @@
         <activity android:name=".activity.GestureLockActivity"/>
 
         <activity android:name=".activity.ZxingActivity"/>
+        <activity android:name=".activity.LottieActivity"/>
+        <activity android:name=".activity.KoltinActivity"/>
     </application>
 
 </manifest>

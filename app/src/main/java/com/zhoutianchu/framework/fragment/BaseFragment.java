@@ -13,8 +13,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import java.util.concurrent.TimeUnit;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,9 +23,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public abstract class BaseFragment extends Fragment {
-
-    private Unbinder unbinder;
-
     /**
      * 网络请求返回后的前置过滤器
      *
@@ -75,7 +70,6 @@ public abstract class BaseFragment extends Fragment {
         View view = setLayout(inflater, container, savedInstanceState);
         if (view != null)
             view.setOnTouchListener((v1, v2) -> true);
-        unbinder = ButterKnife.bind(this, view);
         addAction();
         initData();
         return view;
@@ -83,7 +77,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        unbinder.unbind();
         EventBus.getDefault().unregister(this);
         super.onDestroyView();
     }

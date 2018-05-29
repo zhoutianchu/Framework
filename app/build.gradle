@@ -1,10 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.zhoutianchu.framework"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -25,7 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.testConfig
         }
-        debug{
+        debug {
             minifyEnabled false
             shrinkResources false  // 启用 Resource Shrinking
             signingConfig signingConfigs.testConfig
@@ -45,16 +47,15 @@ android {
         compile 'com.android.support:recyclerview-v7:27.1.0'
         compile 'com.android.support:appcompat-v7:27.1.0-beta2'
         compile 'com.android.support:support-v4:27.1.0'
+        compile 'com.android.support:design:27.1.0'
 
         compile 'com.squareup.retrofit2:retrofit:2.2.0'
         compile 'org.greenrobot:eventbus:3.0.0'
         compile 'io.reactivex.rxjava2:rxandroid:2.0.0'
         compile 'com.google.code.gson:gson:2.8.0'
         compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-        compile 'com.jakewharton:butterknife:8.5.1'
         compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
         compile 'com.squareup.okhttp3:okhttp:3.7.0'
-        annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
         compile 'com.squareup.retrofit2:converter-gson:2.2.0'
         compile 'cn.yipianfengye.android:zxing-library:2.2'
         compile 'me.imid.swipebacklayout.lib:library:1.1.0'
@@ -69,10 +70,23 @@ android {
         //glide
         implementation 'com.github.bumptech.glide:glide:4.6.1'
         annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+
+        //lottie,可使用json定义动画文件
+        compile 'com.airbnb.android:lottie:2.5.3'
+    }
+    sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/cpp/'] } }
+    externalNativeBuild {
+        cmake {
+            path 'CMakeLists.txt'
+        }
     }
 }
 
 
 dependencies {
     compile project(path: ':imagepicker')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

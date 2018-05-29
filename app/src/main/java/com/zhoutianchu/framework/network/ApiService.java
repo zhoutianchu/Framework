@@ -5,7 +5,9 @@ package com.zhoutianchu.framework.network;
 import com.zhoutianchu.framework.bean.base.HttpReq;
 import com.zhoutianchu.framework.bean.base.HttpResponse;
 import com.zhoutianchu.framework.bean.req.BaseReq;
+import com.zhoutianchu.framework.bean.req.PersonReq;
 import com.zhoutianchu.framework.bean.resp.BaseResp;
+import com.zhoutianchu.framework.bean.resp.PersonResp;
 
 import java.util.Map;
 
@@ -56,5 +58,8 @@ public interface ApiService {
     @Multipart
     @POST
     Observable<HttpResponse<BaseResp>> upload(@Url String url,@PartMap Map<String, RequestBody> params);
+
+    @POST("app/person")
+    Observable<HttpResponse<PersonResp>> getPerson(@Body HttpReq<PersonReq> req);
 }
 

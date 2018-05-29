@@ -40,4 +40,9 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:fontFamily">@font/font_content</item>
     </style>
+
+    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
 </resources>

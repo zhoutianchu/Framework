@@ -18,18 +18,18 @@ import android.widget.Toast;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.zhoutianchu.framework.bean.base.HttpResponse;
 import com.zhoutianchu.framework.bean.base.Message;
+import com.zhoutianchu.framework.bean.resp.BaseResp;
 import com.zhoutianchu.framework.intf.PermissionListener;
+import com.zhoutianchu.framework.network.ApiService;
+import com.zhoutianchu.framework.network.RetrofitClient;
 import com.zhoutianchu.framework.view.MocamProgressDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,7 +42,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  */
 
 public abstract class BaseActivity extends SwipeBackActivity {
-    protected static int FirstValue = 10001;
+    protected static int FirstValue = 0;
 
     private MocamProgressDialog progressDialog;
 
@@ -53,7 +53,8 @@ public abstract class BaseActivity extends SwipeBackActivity {
     private static PermissionListener mPermissionListener;
     private static final int CODE_REQUEST_PERMISSION = 1;
 
-    protected static int IMAGE_PICKER=FirstValue++;
+    protected static int IMAGE_PICKER = FirstValue++;
+
 
 
     /**
@@ -72,16 +73,16 @@ public abstract class BaseActivity extends SwipeBackActivity {
      * @param <T>
      * @return
      */
-    protected <T extends HttpResponse> ObservableTransformer<T, T> resp_filter() {
+    protected <T extends Object> ObservableTransformer<T, T> resp_filter() {
         return upstream ->
                 upstream.subscribeOn(Schedulers.io()).onErrorResumeNext(
                         err -> {
                             return Observable.just((T) new HttpResponse<>(HttpResponse.NOT_FOUND, err.getMessage()));
                         }
-                ).filter(resp -> !isFinishing()).observeOn(AndroidSchedulers.mainThread()).filter(resp -> {
+                ).observeOn(AndroidSchedulers.mainThread()).filter(resp -> {
                     hideProgress();
-                    if (!resp.isSuccess()) {
-                        showToast(resp.getMsgInfo());
+                    if (!((HttpResponse)resp).isSuccess()) {
+                        showToast(((HttpResponse)resp).getMsgInfo());
                         return false;
                     }
                     return true;
@@ -113,7 +114,6 @@ public abstract class BaseActivity extends SwipeBackActivity {
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         }
-        ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         addAction();
         initData();
@@ -158,7 +158,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
      * @param listener    权限回调接口
      */
     protected void requestPermissions(String[] permissions, PermissionListener listener) {
-        Activity activity =this;
+        Activity activity = this;
         if (null == activity) {
             return;
         }
@@ -182,6 +182,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
     public void showProgress() {
         Observable.just("").compose(transformer_to_main()).subscribe(s -> {
             progressDialog = new MocamProgressDialog(BaseActivity.this);
+            progressDialog.setCancelable(false);
             progressDialog.show();
         });
     }
@@ -244,6 +245,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
 
     @Override
     protected void onDestroy() {
+        hideProgress();
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
@@ -259,11 +261,15 @@ public abstract class BaseActivity extends SwipeBackActivity {
 
     /**
      * 震动
+     *
      * @param time
      */
-    protected void setVibrator(long time){
-        Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
+    protected void setVibrator(long time) {
+        Vibrator vibrator = (Vibrator) this.getSystemService(this.VIBRATOR_SERVICE);
         vibrator.vibrate(time);
     }
 
+    protected void sendEvent(Message event){
+        EventBus.getDefault().post(event);
+    }
 }

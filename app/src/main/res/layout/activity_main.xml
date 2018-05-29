@@ -1,122 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             xmlns:GestureLock="http://schemas.android.com/tools">
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#029FF1"
+    app:srlAccentColor="@android:color/white"
+    app:srlEnableHeaderTranslationContent="false"
+    app:srlEnableLoadMore="false"
+    app:srlEnablePreviewInEditMode="true"
+    app:srlPrimaryColor="#029FF1">
+    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
+    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
+    <com.scwang.smartrefresh.header.MaterialHeader
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"/>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#029FF1"
-        app:srlAccentColor="@android:color/white"
-        app:srlEnableHeaderTranslationContent="false"
-        app:srlEnableLoadMore="false"
-        app:srlEnablePreviewInEditMode="true"
-        app:srlPrimaryColor="#029FF1">
-        <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
-        <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
-        <com.scwang.smartrefresh.header.WaveSwipeHeader
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:background="@color/bg_color">
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/bg_color">
+            android:layout_height="match_parent">
 
-            <com.zhoutianchu.framework.view.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/test"
-                app:delay_time="5000"
-                app:layout_constraintDimensionRatio="H,16:9"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
 
-            <ImageView
-                android:id="@+id/img_head"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:layout_constraintTop_toBottomOf="@id/banner"/>
-            <Button
-                app:layout_constraintLeft_toRightOf="@id/img_head"
-                app:layout_constraintTop_toBottomOf="@id/banner"
-                android:id="@+id/btn_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="扫码"/>
-            <com.zhoutianchu.framework.view.spanner.NiceSpinner
-                app:layout_constraintLeft_toRightOf="@id/btn_3"
-                app:layout_constraintTop_toBottomOf="@id/banner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/nice_spanner"/>
-            <Button
-                app:layout_constraintLeft_toRightOf="@id/nice_spanner"
-                app:layout_constraintTop_toBottomOf="@id/banner"
-                android:id="@+id/btn_choose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="图片选择"/>
-            <LinearLayout
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txt_random"
-                    style="@style/text_content_style"
-                    />
-                <Button
-                    android:id="@+id/btn_random"
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/cool"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="random"/>
-            </LinearLayout>
+                    app:contentScrim="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <com.zhoutianchu.framework.view.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="222dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/test"
+                        app:delay_time="5000"
+                        />
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/NoSpaceActionBarTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_collapseMode="pin"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                android:id="@+id/button_test"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="标题占位"
+                                />
+                        </RelativeLayout>
+                    </android.support.v7.widget.Toolbar>
+                </android.support.design.widget.CollapsingToolbarLayout>
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.design.widget.CoordinatorLayout>
+
+        <ImageView
+            android:id="@+id/img_head"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="222dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="222dp"
+            android:text="扫码"
+            app:layout_constraintLeft_toRightOf="@id/img_head"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.zhoutianchu.framework.view.spanner.NiceSpinner
+            android:id="@+id/nice_spanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="222dp"
+            app:layout_constraintLeft_toRightOf="@id/btn_3"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="222dp"
+            android:text="图片选择"
+            app:layout_constraintLeft_toRightOf="@id/nice_spanner"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_lottie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="222dp"
+            android:text="lottie"
+            app:layout_constraintLeft_toRightOf="@id/btn_choose"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txt_random"
+                style="@style/text_content_style"
+                />
 
             <Button
-                android:id="@+id/btn_test"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.95"
-                app:layout_constraintVertical_bias="0.95"
+                android:id="@+id/btn_random"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="设置"/>
+                android:text="random"/>
+
 
             <Button
-                android:id="@+id/btn_test1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.55"
-                app:layout_constraintVertical_bias="0.95"
+                android:id="@+id/btn_koltin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="校验"/>
+                android:text="koltin"/>
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_test2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintVertical_bias="0.95"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="修改"/>
-        </android.support.constraint.ConstraintLayout>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</FrameLayout>
+        <Button
+            android:id="@+id/btn_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.95"/>
+
+        <Button
+            android:id="@+id/btn_test1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="校验"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.95"/>
+
+        <Button
+            android:id="@+id/btn_test2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.95"/>
+    </android.support.constraint.ConstraintLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
